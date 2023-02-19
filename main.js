@@ -1,51 +1,81 @@
-const myform = document.querySelector("#my-form");
-const descriptionInput = document.querySelector("#description");
-const amountInput = document.querySelector("#expAmt");
-const catInput = document.querySelector("#Category");
-const msg = document.querySelector(".msg");
+// Get expense form and list
+const expenseForm = document.getElementById('expense-form');
+const expenseList = document.getElementById('expense-list');
 
-const list = document.querySelector('.list');
+// Load expenses from local storage
+let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-// listen for form submit
-myform.addEventListener('submit', onSubmit);
+// Create expense item
+function createExpenseItem(expense) {
+  const expenseItem = document.createElement('li');
+  expenseItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+  expenseItem.innerHTML = `
+    <div>
+      <strong>${expense.name}</strong>
+      <br>
+      <span class="text-muted">${expense.category}</span>
+    </div>
+    <div>
+      <span class="badge badge-primary badge-pill">${expense.amount} EGP</span>
+      <button class="btn btn-danger btn-sm ml-3 delete-btn">Delete</button>
+      <button class="btn btn-secondary btn-sm edit-btn ml-2">Edit</button>
+    </div>
+  `;
 
-function onSubmit(e){
-    e.preventDefault();
+  // Add delete button event listener
+  const deleteButton = expenseItem.querySelector('.delete-btn');
+  deleteButton.addEventListener('click', () => {
+    expenses = expenses.filter(e => e !== expense);
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    expenseItem.remove();
+  });
 
-    if(descriptionInput.value === '' || amountInput.value ===''){
-        msg.classList.add('error');
-        msg.innerHTML ='Please enter all fields';
+  // Add edit button event listener
+  const editButton = expenseItem.querySelector('.edit-btn');
+  editButton.addEventListener('click', () => {
+    expenses = expenses.filter(e => e !== expense);
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    document.getElementById('expense-name').value = expense.name;
+    document.getElementById('expense-amount').value = expense.amount;
+    document.getElementById('expense-category').value = expense.category;
+  });
 
-        // remove after 3 seconds
-        setTimeout(()=>msg.remove(),3000);
-    }else{
-        // create new items
-        let li = document.createElement('li');
-        let details = {
-            amount :amountInput.value,
-            desc : descriptionInput.value,
-            category : catInput.value
-        }
-        li.classList="list-group-item";
-
-        li.innerHTML =`
-        <div id=${amountInput.value}>
-            ${details.amount} - ${details.desc}- ${details.category}
-            <button class="btn btn-primary delete" onclikc="deleteItem(${amountInput.value})">delete Expense</button>
-            <button class="btn btn-primary edit" onclikc="editItem(${details.amount},${details.desc})">Edit Expense</button>
-        </div>
-        `
-        list.appendChild(li);
-    }
+  return expenseItem;
 }
 
-function deleteItem(amount){
-    const toDelete = document.getElementById('expAmt').value;
-    toDelete.style.display ='none';
+// Render expenses
+function renderExpenses() {
+  expenseList.innerHTML = '';
+  expenses.forEach(expense => {
+    expenseList.appendChild(createExpenseItem(expense));
+  });
 }
 
-function editItem(amount, desc){
-    amountInput.value = amount;
-    descriptionInput.value = desc;
-    deleteItem(amount);
-}
+// Add expense
+expenseForm.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const expenseName = document.getElementById('expense-name').value;
+  const expenseAmount = document.getElementById('expense-amount').value;
+  const expenseCategory = document.getElementById('expense-category').value;
+
+  if (!expenseName || !expenseAmount || !expenseCategory) {
+    return;
+  }
+
+  const expense = {
+    name: expenseName,
+    amount: expenseAmount,
+    category: expenseCategory
+  };
+  expenses.push(expense);
+  localStorage.setItem('expenses', JSON.stringify(expenses));
+  expenseList.appendChild(createExpenseItem(expense));
+
+  expenseForm.reset();
+});
+
+// Load and render expenses
+window.addEventListener('load', () => {
+  renderExpenses();
+});
