@@ -112,23 +112,23 @@
 
 // var button = document.getElementById('button').addEventListener
 // ('click', function(e){
-    // console.log("Button clicked");
-    // document.getElementById('header-title').textContent = "Changed header";
-    // document.querySelector('#main').style.backgroundColor = "#f4f4f4";
-    // console.log(e.target.id);
-    // console.log(e.target.className);
-    // console.log(e.target.classList);
-    // var output = document.querySelector('.output');
-    // output.innerHTML = `<h3> ${e.target.id} </h3>`;
-    // // console.log(e.type);
-    // console.log(e.clientX);
-    // console.log(e.clientY);
+// console.log("Button clicked");
+// document.getElementById('header-title').textContent = "Changed header";
+// document.querySelector('#main').style.backgroundColor = "#f4f4f4";
+// console.log(e.target.id);
+// console.log(e.target.className);
+// console.log(e.target.classList);
+// var output = document.querySelector('.output');
+// output.innerHTML = `<h3> ${e.target.id} </h3>`;
+// // console.log(e.type);
+// console.log(e.clientX);
+// console.log(e.clientY);
 
-    // console.log(e.offsetX);
-    // console.log(e.offsetY);
-    // console.log(e.altKey);
-    // console.log(e.shiftKey);
-    // console.log(e.ctrlKey);
+// console.log(e.offsetX);
+// console.log(e.offsetY);
+// console.log(e.altKey);
+// console.log(e.shiftKey);
+// console.log(e.ctrlKey);
 // })
 
 // var button = document.getElementById('button')
@@ -172,4 +172,84 @@
 //     // box.style.backgroundColor = `rgb(${e.offsetX}, ${e.offsetY}, 40)`
 //     // // document.body.style.backgroundColor = `rgb(${e.offsetX}, ${e.offsetY}, 40)`;
 // }
+
+// part 3 dom manipulation
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
+// form submit event
+form.addEventListener('submit', addItem);
+// delete the item
+itemList.addEventListener('click', removeItem);
+// filter event
+filter.addEventListener('keyup', filterItem);
+
+// add item function
+function addItem(e) {
+    e.preventDefault();
+
+    var newItem = document.getElementById('item').value;
+
+    // Create new li element
+    var li = document.createElement('li');
+    // Add class
+    li.className = 'list-group-item';
+    // Add text node with input value
+    li.appendChild(document.createTextNode(newItem));
+
+    // add edit button
+    var editbtn = document.createElement('button');
+    editbtn.type = "button";
+    editbtn.className = "btn btn-danger btn-sm float-right editBtn ml-2";
+    editbtn.appendChild(document.createTextNode('Edit'));
+    li.appendChild(editbtn);
+
+    // Create del button element
+    var deleteBtn = document.createElement('button');
+
+    // Add classes to del button
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+
+    // Append text node
+    deleteBtn.appendChild(document.createTextNode('X'));
+
+    // Append button to li
+    li.appendChild(deleteBtn);
+
+    
+
+    
+    // Append li to list
+    itemList.appendChild(li);
+
+
+}
+// remove li
+function removeItem(e) {
+    if (e.target.classList.contains('delete')) {
+        if (confirm('Are you sure')) {
+            var li = e.target.parentElement;
+            itemList.removeChild(li);
+        }
+    }
+}
+
+// filter item
+function filterItem(e) {
+    // convert to lowercase
+    // console.log(e.target);
+    var text = e.target.value.toLowerCase();
+    // console.log(text);
+
+    var items = itemList.getElementsByTagName('li');
+    // console.log(items);
+    Array.from(items).forEach((item) => {
+        var itemName = item.firstChild.textContent;
+        if (itemName.toLocaleLowerCase().indexOf(text) != -1) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    })
+}
 
