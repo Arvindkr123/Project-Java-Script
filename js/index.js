@@ -391,38 +391,220 @@
 //     `<h1>Hello</h1>`;
 // })
 
-const myForm = document.getElementById('my-form');
-const name = document.getElementById('name');
-const email = document.getElementById('email')
-const list = document.querySelector('.list-group');
-const msg = document.querySelector('.msg');
+// const myForm = document.getElementById('my-form');
+// const name = document.getElementById('name');
+// const email = document.getElementById('email')
+// const list = document.querySelector('.list-group');
+// const msg = document.querySelector('.msg');
 
-myForm.addEventListener("submit", onSubmit);
-function onSubmit(e){
-    e.preventDefault();
-    // if(name.value==='' || email.value===''){
-    //     alert('please enter all fields');
-    // }else{
-    //     // console.log();
-    //     alert('Success');
-    // }
+// myForm.addEventListener("submit", onSubmit);
+// function onSubmit(e){
+//     e.preventDefault();
+//     // if(name.value==='' || email.value===''){
+//     //     alert('please enter all fields');
+//     // }else{
+//     //     // console.log();
+//     //     alert('Success');
+//     // }
 
-    if(name.value===''|| email.value===''){
-        msg.innerHTML=`<h3>please enter all fields</h3>`;
-        msg.classList.add('bg-danger');
-        setTimeout(()=>{
-            msg.remove();
-        },3000)
-    }else{
-        // console.log('success');
-        const li = document.createElement('li');
-        li.classList.add('list-group-item');
-        li.appendChild(document.createTextNode(`${name.value} ${email.value}`));
+//     if(name.value===''|| email.value===''){
+//         msg.innerHTML=`<h3>please enter all fields</h3>`;
+//         msg.classList.add('bg-danger');
+//         setTimeout(()=>{
+//             msg.remove();
+//         },3000)
+//     }else{
+//         // console.log('success');
+//         const li = document.createElement('li');
+//         li.classList.add('list-group-item');
+//         li.appendChild(document.createTextNode(`${name.value} ${email.value}`));
 
-        list.appendChild(li);
+//         list.appendChild(li);
 
-        // clear all fields
-        name.value ='';
-        email.value ='';
+//         // clear all fields
+//         name.value ='';
+//         email.value ='';
+//     }
+// }
+
+// function Person(firstName, lastName, age, sex) {
+//     this.age = age;
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//     this.sex = sex;
+//     this.printFullName = () => {
+//       console.log(this.firstName, this.lastName);
+//     };
+// }
+
+// Person.prototype.findegligibleOrNot = function findegligibleOrNot(minAge) {
+//     // console.log(this.age);
+//     if (this.age > minAge) {
+//     //   this.printFullName();
+//       console.log("ELIGIBLE");
+//     } else {
+//     //   this.printFullName();
+//       console.log("NOT ELIGIBLE");
+//     }
+// };
+
+// function createNewStudents(){
+//     const person1 = new Person("yash", "prasad", 10, "M");
+//     const person2 = new Person("vaibhav", "prasad", 20, "M");
+    
+//     person1.printFullName();
+//     person1.findegligibleOrNot(18);
+//     person2.printFullName();
+//     person2.findegligibleOrNot(18);
+// }
+
+// createNewStudents();
+
+// async function readInput() {
+//     let inputString = '';
+//     var output=[];
+//     process.stdin.on('data', inputStdin => {
+//         inputString += inputStdin;
+//         const inputArr = inputString.split(/(?:\r\n|\r|\n)/g)
+//         const argumentsArr = inputArr[0].split(',');
+//         createNewStudents()
+//         process.exit();
+        
+//     })
+// }
+// readInput();
+
+// class Student {
+//     constructor(firstName, lastName , rollNumber , age) {
+//         //complete this function to initialize the object
+//         this.firstName =firstName;
+//         this.lastName = lastName;
+//         this.rollNumber = rollNumber;
+//         this.age = age;
+//     }
+    
+//     printFullName() {
+//         //complete this function to print the full Name of the student object invoking the method
+//         console.log(`${this.firstName} ${this.lastName}`);
+//     }
+    
+//     minorOrMajor(){
+//        //If age greater than 18 print Major
+//        if(this.age>18){
+//            console.log("Major");
+//        }else{
+//            console.log("Minor");
+//        }
+//        //if age less than 18 print Minor
+//        //Complete this function
+//     }
+// }
+// function createNewStudents(){
+//     //create 2 object Yash and Ram with initial values as mentioned in question
+//     const yash = new Student('yash', 'prasad', 12, 27);
+//     const ram =  new Student('ram', 'prasad', 14, 15);
+
+//     //Print yash's full name by invoking printFullName()   
+//     yash.printFullName();
+//     //Print whether yash is minor or major by invoking minorOrMajor function
+//     yash.minorOrMajor();
+//    //Print Rams's full name by invoking printFullName()  
+//     ram.printFullName();
+//     //Print whether Ram is minor or major by invoking minorOrMajor function
+//     ram.minorOrMajor();
+// }
+// createNewStudents();
+
+// "use strict"
+// class User{
+    
+//     // static count=0;
+//     //initialize a  static variable
+//     static count=0;
+//     constructor(username, email, password) {
+//         //Complete the constructor function and
+//         //  also keep a count of total users created
+//         this.username = username;
+//         this.email = email;
+//         this.password = password;
+//         User.count++;
+//     }
+    
+//     // const count=0; 
+//     // register(){
+//     //     count+=1;
+//     //     // console.log(this.username+' is now registered');
+//     // }
+//     printNumberOfUsers(){
+//         //console log the total number of users in the same format as in outpu
+//         console.log("currentnumberofusers =",User.count);
+//     }
+// }
+
+// function createNewStudents(){
+//     const yash = new User("yash", "yash@gmail.com", '100000xbasbcjsa');
+//     yash.printNumberOfUsers();
+//     const user2 = new User("vaibhav", "vaibhav@gmail.com", '2cs0');
+//     user2.printNumberOfUsers();
+//     yash.printNumberOfUsers();
+// }
+// createNewStudents();
+
+class User{
+    static count = 0;
+    constructor(username, email, password) {
+      this.username = username;
+      this.email = email;
+      this.password = password;
+      User.count++
+    }
+    printNumberOfUsers(){
+        console.log("currentnumberofusers =", User.count)
     }
 }
+
+class Member extends User {
+  constructor(username, email, password, memberpackage) {
+      
+    super(username, email, password);     // complete the super function only. Do not make any other changes
+    
+    this.membershipactivetilldate = new Date(2023, 2, 3)//assume user has joined ur platform on 3rd March
+    this.package = memberpackage;
+  }
+  
+    //Based on the package bought, increase the membershipactivetilldate
+    //Monthly membership increases the va1idity by 1 month
+    //Yearly membership increases the va1idity by 1 year
+  purchaseMembership(membershippackagename) {
+      
+    //   Complete this function
+    if (membershippackagename === "MONTHLYPACKAGE") {
+    this.membershipactivetilldate.setMonth(this.membershipactivetilldate.getMonth()+1);
+    }   
+    else if (membershippackagename === "YEARLYPACKAGE") {
+    this.membershipactivetilldate.setFullYear(this.membershipactivetilldate.getFullYear()+1);
+    }
+    
+    this.package = membershippackagename;
+ 
+  }
+
+  subscriptionActiveTill() {
+    console.log(
+      this.username +
+        " is subscribed to " +
+        this.package +
+        " uptill " +
+        this.membershipactivetilldate.toDateString()
+    );
+  }
+
+}
+
+function createNewStudents(username, email, password, membershippackagename){
+    const mike = new Member(username, email, password);  
+    mike.purchaseMembership(membershippackagename);
+    mike.subscriptionActiveTill();
+}
+
+createNewStudents('Arvind','thakurarvindkr10@gmail.com',12345, 'MONTHLY');
