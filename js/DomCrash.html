@@ -13,7 +13,26 @@
 
 <body>
 
-    <header id="main-header" class="bg-success text-white p-4 mb-3">
+    <div class="container p-3 m-auto">
+        <div class="container m-5">
+            <h2 class="text-center">User Details </h1>
+            <form onsubmit="saveToLocalStorage(event)" class="form-control">
+                <label for="name">Name</label><br>
+                <input type="text" name="name" id="name" required /><br>
+                <label for="email">Eamil</label><br>
+                <input type="email" name="email" id="email" required><br><br>
+                <label for="tel">PhoneNumber</label><br>
+                <input type="tel" name="tel" id="tel" required><br><br>
+                <button class="btn btn-outline-primary">Submit</button>
+            </form>
+            <ul class="list-group">
+                <li class="list-group-item">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- <header id="main-header" class="bg-success text-white p-4 mb-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -44,7 +63,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
 
     <!-- <header id="main-header" class="bg-success text-white p-4 mb-3">
         <div class="container cnt">
