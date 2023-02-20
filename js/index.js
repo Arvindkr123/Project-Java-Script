@@ -391,41 +391,41 @@
 //     `<h1>Hello</h1>`;
 // })
 
-// const myForm = document.getElementById('my-form');
-// const name = document.getElementById('name');
-// const email = document.getElementById('email')
-// const list = document.querySelector('.list-group');
-// const msg = document.querySelector('.msg');
+const myForm = document.getElementById('my-form');
+const name = document.getElementById('name');
+const email = document.getElementById('email')
+const list = document.querySelector('.list-group');
+const msg = document.querySelector('.msg');
 
-// myForm.addEventListener("submit", onSubmit);
-// function onSubmit(e){
-//     e.preventDefault();
-//     // if(name.value==='' || email.value===''){
-//     //     alert('please enter all fields');
-//     // }else{
-//     //     // console.log();
-//     //     alert('Success');
-//     // }
+myForm.addEventListener("submit", onSubmit);
+function onSubmit(e){
+    e.preventDefault();
+    // if(name.value==='' || email.value===''){
+    //     alert('please enter all fields');
+    // }else{
+    //     // console.log();
+    //     alert('Success');
+    // }
 
-//     if(name.value===''|| email.value===''){
-//         msg.innerHTML=`<h3>please enter all fields</h3>`;
-//         msg.classList.add('bg-danger');
-//         setTimeout(()=>{
-//             msg.remove();
-//         },3000)
-//     }else{
-//         // console.log('success');
-//         const li = document.createElement('li');
-//         li.classList.add('list-group-item');
-//         li.appendChild(document.createTextNode(`${name.value} ${email.value}`));
+    if(name.value===''|| email.value===''){
+        msg.innerHTML=`<h3>please enter all fields</h3>`;
+        msg.classList.add('bg-danger');
+        setTimeout(()=>{
+            msg.remove();
+        },3000)
+    }else{
+        // console.log('success');
+        const li = document.createElement('li');
+        li.classList.add('list-group-item');
+        li.appendChild(document.createTextNode(`${name.value} ${email.value}`));
 
-//         list.appendChild(li);
+        list.appendChild(li);
 
-//         // clear all fields
-//         name.value ='';
-//         email.value ='';
-//     }
-// }
+        // clear all fields
+        name.value ='';
+        email.value ='';
+    }
+}
 
 // function Person(firstName, lastName, age, sex) {
 //     this.age = age;
@@ -550,61 +550,66 @@
 // }
 // createNewStudents();
 
-class User{
-    static count = 0;
-    constructor(username, email, password) {
-      this.username = username;
-      this.email = email;
-      this.password = password;
-      User.count++
-    }
-    printNumberOfUsers(){
-        console.log("currentnumberofusers =", User.count)
-    }
-}
+// class User{
+//     static count = 0;
+//     constructor(username, email, password) {
+//       this.username = username;
+//       this.email = email;
+//       this.password = password;
+//       User.count++
+//     }
+//     printNumberOfUsers(){
+//         console.log("currentnumberofusers =", User.count)
+//     }
+// }
 
-class Member extends User {
-  constructor(username, email, password, memberpackage) {
+// class Member extends User {
+//   constructor(username, email, password, memberpackage) {
       
-    super(username, email, password);     // complete the super function only. Do not make any other changes
+//     super(username, email, password);     // complete the super function only. Do not make any other changes
     
-    this.membershipactivetilldate = new Date(2023, 2, 3)//assume user has joined ur platform on 3rd March
-    this.package = memberpackage;
-  }
+//     this.membershipactivetilldate = new Date(2023, 2, 3)//assume user has joined ur platform on 3rd March
+//     this.package = memberpackage;
+//   }
   
-    //Based on the package bought, increase the membershipactivetilldate
-    //Monthly membership increases the va1idity by 1 month
-    //Yearly membership increases the va1idity by 1 year
-  purchaseMembership(membershippackagename) {
+//     //Based on the package bought, increase the membershipactivetilldate
+//     //Monthly membership increases the va1idity by 1 month
+//     //Yearly membership increases the va1idity by 1 year
+//   purchaseMembership(membershippackagename) {
       
-    //   Complete this function
-    if (membershippackagename === "MONTHLYPACKAGE") {
-    this.membershipactivetilldate.setMonth(this.membershipactivetilldate.getMonth()+1);
-    }   
-    else if (membershippackagename === "YEARLYPACKAGE") {
-    this.membershipactivetilldate.setFullYear(this.membershipactivetilldate.getFullYear()+1);
-    }
+//     //   Complete this function
+//     if (membershippackagename === "MONTHLYPACKAGE") {
+//     this.membershipactivetilldate.setMonth(this.membershipactivetilldate.getMonth()+1);
+//     }   
+//     else if (membershippackagename === "YEARLYPACKAGE") {
+//     this.membershipactivetilldate.setFullYear(this.membershipactivetilldate.getFullYear()+1);
+//     }
     
-    this.package = membershippackagename;
+//     this.package = membershippackagename;
  
-  }
+//   }
 
-  subscriptionActiveTill() {
-    console.log(
-      this.username +
-        " is subscribed to " +
-        this.package +
-        " uptill " +
-        this.membershipactivetilldate.toDateString()
-    );
-  }
+//   subscriptionActiveTill() {
+//     console.log(
+//       this.username +
+//         " is subscribed to " +
+//         this.package +
+//         " uptill " +
+//         this.membershipactivetilldate.toDateString()
+//     );
+//   }
 
-}
+// }
 
-function createNewStudents(username, email, password, membershippackagename){
-    const mike = new Member(username, email, password);  
-    mike.purchaseMembership(membershippackagename);
-    mike.subscriptionActiveTill();
-}
+// function createNewStudents(username, email, password, membershippackagename){
+//     const mike = new Member(username, email, password);  
+//     mike.purchaseMembership(membershippackagename);
+//     mike.subscriptionActiveTill();
+// }
 
-createNewStudents('Arvind','thakurarvindkr10@gmail.com',12345, 'MONTHLY');
+// createNewStudents('Arvind','thakurarvindkr10@gmail.com',12345, 'MONTHLY');
+
+
+// const list = document.querySelector('.list-group');
+// list.firstElementChild.innerHTML = `<h1 style="color:green">hello<h1>`;
+// list.children[1].style.backgroundColor='yellow';

@@ -1,81 +1,68 @@
-// Get expense form and list
-const expenseForm = document.getElementById('expense-form');
-const expenseList = document.getElementById('expense-list');
+$(document).ready(function() {
 
-// Load expenses from local storage
-let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+  // retrieve expenses from local storage or create an empty array
+  let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-// Create expense item
-function createExpenseItem(expense) {
-  const expenseItem = document.createElement('li');
-  expenseItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
-  expenseItem.innerHTML = `
-    <div>
-      <strong>${expense.name}</strong>
-      <br>
-      <span class="text-muted">${expense.category}</span>
-    </div>
-    <div>
-      <span class="badge badge-primary badge-pill">${expense.amount} EGP</span>
-      <button class="btn btn-danger btn-sm ml-3 delete-btn">Delete</button>
-      <button class="btn btn-secondary btn-sm edit-btn ml-2">Edit</button>
-    </div>
-  `;
-
-  // Add delete button event listener
-  const deleteButton = expenseItem.querySelector('.delete-btn');
-  deleteButton.addEventListener('click', () => {
-    expenses = expenses.filter(e => e !== expense);
+  // function to add expense to the list and to local storage
+  function addExpense(expense) {
+    expenses.push(expense);
     localStorage.setItem('expenses', JSON.stringify(expenses));
-    expenseItem.remove();
-  });
-
-  // Add edit button event listener
-  const editButton = expenseItem.querySelector('.edit-btn');
-  editButton.addEventListener('click', () => {
-    expenses = expenses.filter(e => e !== expense);
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-    document.getElementById('expense-name').value = expense.name;
-    document.getElementById('expense-amount').value = expense.amount;
-    document.getElementById('expense-category').value = expense.category;
-  });
-
-  return expenseItem;
-}
-
-// Render expenses
-function renderExpenses() {
-  expenseList.innerHTML = '';
-  expenses.forEach(expense => {
-    expenseList.appendChild(createExpenseItem(expense));
-  });
-}
-
-// Add expense
-expenseForm.addEventListener('submit', event => {
-  event.preventDefault();
-
-  const expenseName = document.getElementById('expense-name').value;
-  const expenseAmount = document.getElementById('expense-amount').value;
-  const expenseCategory = document.getElementById('expense-category').value;
-
-  if (!expenseName || !expenseAmount || !expenseCategory) {
-    return;
+    updateList();
   }
 
-  const expense = {
-    name: expenseName,
-    amount: expenseAmount,
-    category: expenseCategory
-  };
-  expenses.push(expense);
-  localStorage.setItem('expenses', JSON.stringify(expenses));
-  expenseList.appendChild(createExpenseItem(expense));
+  // function to update the list of expenses
+  function updateList() {
+    $('#expenseList').empty();
+    let total = 0;
+    expenses.forEach(function(expense, index) {
+      total += expense.amount;
+      let listItem = $('<li>').addClass('list-group-item d-flex justify-content-between align-items-center')
+        .append($('<span>').text(expense.name))
+        .append($('<span>').text('$' + expense.amount.toFixed(2)))
+        .append($('<span>').addClass('badge badge-primary badge-pill mr-auto').text(expense.category))
+        .append($('<button>').addClass('btn btn-danger btn-sm ml-3 delete').attr('data-index', index).text('Delete'))
+        .append($('<button>').addClass('btn btn-info btn-sm ml-1 edit').attr('data-index', index).text('Edit'));
+      $('#expenseList').append(listItem);
+    });
+    $('#totalExpenses').text('$' + total.toFixed(2));
+  }
 
-  expenseForm.reset();
-});
+  // event listener for adding expenses
+  $('#expenseForm').submit(function(event) {
+    event.preventDefault();
+    let name = $('#expenseName').val();
+    let amount = parseFloat($('#expenseAmount').val());
+    let category = $('#expenseCategory').val();
+    let expense = {
+      name: name,
+      amount: amount,
+      category: category
+    };
+    addExpense(expense);
+    $('#expenseForm')[0].reset();
+  });
 
-// Load and render expenses
-window.addEventListener('load', () => {
-  renderExpenses();
+  // event listener for deleting expenses
+  $(document).on('click', '.delete', function() {
+    let index = $(this).data('index');
+    expenses.splice(index, 1);
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    updateList();
+  });
+
+  // event listener for editing expenses
+  $(document).on('click', '.edit', function() {
+    let index = $(this).data('index');
+    let expense = expenses[index];
+    $('#expenseName').val(expense.name);
+    $('#expenseAmount').val(expense.amount);
+    $('#expenseCategory').val(expense.category);
+    expenses.splice(index, 1);
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    updateList();
+  });
+
+  // initialize the list of expenses on page load
+  updateList();
+
 });
