@@ -110,3 +110,66 @@
 // var h1 = document.querySelector('#header-title');
 // cnt.insertBefore(newDiv, h1)
 
+// var button = document.getElementById('button').addEventListener
+// ('click', function(e){
+    // console.log("Button clicked");
+    // document.getElementById('header-title').textContent = "Changed header";
+    // document.querySelector('#main').style.backgroundColor = "#f4f4f4";
+    // console.log(e.target.id);
+    // console.log(e.target.className);
+    // console.log(e.target.classList);
+    // var output = document.querySelector('.output');
+    // output.innerHTML = `<h3> ${e.target.id} </h3>`;
+    // // console.log(e.type);
+    // console.log(e.clientX);
+    // console.log(e.clientY);
+
+    // console.log(e.offsetX);
+    // console.log(e.offsetY);
+    // console.log(e.altKey);
+    // console.log(e.shiftKey);
+    // console.log(e.ctrlKey);
+// })
+
+// var button = document.getElementById('button')
+// //button.addEventListener('click', runEvent);
+// // button.addEventListener('dblclick', runEvent);
+// // button.addEventListener('mousedown', runEvent);
+// // button.addEventListener('mouseup', runEvent);
+// var box = document.getElementById('box');
+// // box.addEventListener('mouseenter', runEvent);
+// // box.addEventListener('mouseleave', runEvent);
+// // box.addEventListener('mouseover', runEvent);
+// // box.addEventListener('mouseout', runEvent);
+// // box.addEventListener('mousemove', runEvent);
+// var Iteminput = document.querySelector('input[type="text"]');
+// var form = document.querySelector('.form-inline');
+// var output = document.querySelector('.output');
+// var select = document.querySelector('select');
+
+// // Iteminput.addEventListener('keydown', runEvent);
+// // Iteminput.addEventListener('keyup', runEvent);
+// // Iteminput.addEventListener('keypress', runEvent);
+// // Iteminput.addEventListener('focus', runEvent);
+// // Iteminput.addEventListener('blur', runEvent);
+// // Iteminput.addEventListener('cut', runEvent);
+// // Iteminput.addEventListener('paste', runEvent);
+// // Iteminput.addEventListener('input', runEvent);
+// // select.addEventListener('change', runEvent);
+// // select.addEventListener('input', runEvent);
+
+// form.addEventListener('submit', runEvent);
+// function runEvent(e){
+//     e.preventDefault();
+//     console.log("Event Type", e.type);
+//     // console.log(e.target.value);
+//     // output.innerHTML = `<h3>${e.target.value}</h3>`
+//     // output.classList.add('mt-5')
+//     // output.innerHTML = `
+//     //                 <h3>offset X ${e.offsetX}</h3>
+//     //                 <h3>offset Y ${e.offsetY}</h3>
+//     // `;
+//     // box.style.backgroundColor = `rgb(${e.offsetX}, ${e.offsetY}, 40)`
+//     // // document.body.style.backgroundColor = `rgb(${e.offsetX}, ${e.offsetY}, 40)`;
+// }
+
