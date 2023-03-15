@@ -106,8 +106,8 @@
 //     return acc;
 // },{})
 
-// // console.log(output);
-// // const ans = Object.entries(output).map(([key,val])=>parseInt(key));
+// console.log(output);
+// const ans = Object.entries(output).map(([key,val])=>parseInt(key));
 // const ans = Object.entries(output).map(([key,val])=>val);
 // console.log(ans);
 
@@ -137,3 +137,45 @@
 // }, {})).map(([value, frequency]) => [parseInt(value), frequency]);
 
 // console.log(frequencyCount);
+
+// call apply and bind
+
+// let student ={
+//     firstName :'anil',
+//     lastName : 'sidhu',
+//     age : 30,
+// }
+
+// let teacher ={
+//     firstName :'peter',
+//     lastName : 'Parker',
+//     age : 30,
+// }
+
+// function getEmail(){
+//     return this.email =`${this.firstName}${this.lastName}12@gmail.com`;
+// }
+
+// function chooseSubject(sub1, sub2, sub3){
+//     console.log(sub1, sub2, sub3);
+// }
+// console.log(getEmail.call(teacher));
+// console.log(getEmail.call(student));
+// console.log(chooseSubject.apply(teacher, ["Maths", "English", "Hindi"]));
+// // console.log(getEmail.bind(teacher));
+// console.log(teacher);
+// let callAnotherTime =getEmail.bind(teacher);
+// console.log(callAnotherTime());
+// console.warn(teacher.getEmail());
+
+
+let obj = {
+    abc:1,
+    def :2
+}
+
+let list = []
+for(let i=0; i<10; i++){
+    list.push(obj);
+}
+console.log(list);

@@ -15,6 +15,8 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
+let url = 'https://crudcrud.com/api/8957dda34ac4437d95359629798656a1/expanse'
+
 let formValidation = () => {
     return new Promise((resolve, reject) => {
         if (expenseAmount.value === "" || description.value === "" || category.value === "") {
@@ -44,11 +46,11 @@ let acceptData = () => {
             Category: category.value,
         };
         axios
-            .post("https://crudcrud.com/api/37ee25db9f48479a93e2ead4b17f6024/expenses", payload)
+            .post(url, payload)
             .then(async (response) => {
                 console.log(response.data);
                 try {
-                    const res = await axios.get("https://crudcrud.com/api/37ee25db9f48479a93e2ead4b17f6024/expenses");
+                    const res = await axios.get(url);
                     data = res.data;
                     localStorage.setItem("data", JSON.stringify(data));
                     resolve();
@@ -102,7 +104,7 @@ let deleteTask = (e) => {
     }
 
     // Delete the item from the database
-    axios.delete(`https://crudcrud.com/api/37ee25db9f48479a93e2ead4b17f6024/expenses/${itemId}`)
+    axios.delete(`${url}/${itemId}`)
         .then((response) => {
             console.log(response);
         })
@@ -133,7 +135,7 @@ let editTask = (e) => {
     } catch (error) {
         console.error(error);
     }
-    axios.delete(`https://crudcrud.com/api/37ee25db9f48479a93e2ead4b17f6024/expenses/${itemId}`)
+    axios.delete(`${url}/${itemId}`)
         .then((response) => {
             console.log(response);
         })
@@ -148,7 +150,7 @@ let editTask = (e) => {
         Category: category.value,
     };
     const expenseId = listItem.id;
-    axios.put(`https://crudcrud.com/api/37ee25db9f48479a93e2ead4b17f6024/expenses/${expenseId}`, payload)
+    axios.put(`${url}/${expenseId}`, payload)
         .then((response) => {
             console.log(response.data);
             data[expenseId] = payload;
